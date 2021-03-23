@@ -5,7 +5,7 @@ export const globalStyles = StyleSheet.create({
         flex: 1,
         padding: 20,
         alignItems: 'center', justifyContent: 'center',
-        backgroundColor: 'pink',
+        //backgroundColor: 'pink',
     },
     titleText: {
         fontFamily: 'PlayfairDisplay_400Regular',
