@@ -6,6 +6,7 @@ import Card from '../shared/card';
 import { globalStyles } from '../styles/global'
 import { MaterialIcons } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context';
+import ReviewForm from './reviewForm';
 
 export default function Home({ navigation }) {
     const ICON_SIZE = 28;
@@ -27,7 +28,7 @@ export default function Home({ navigation }) {
                         style={{ ...styles.modalToggle, ...styles.modalClose }}
                         onPress={() => (setModalOpen(!modalOpen))}
                     />
-                    <Text style={styles.modalText}>Hello from the modal !</Text>
+                    <ReviewForm />
                 </SafeAreaView>
             </Modal>
             <MaterialIcons
@@ -66,6 +67,6 @@ const styles = StyleSheet.create({
     },
     modalClose: {
         marginTop: 50,
-        marginBottom: 0,
+        marginBottom: 20,
     }
 })
