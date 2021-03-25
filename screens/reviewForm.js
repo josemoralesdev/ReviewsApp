@@ -2,10 +2,18 @@ import React from 'react'
 import { StyleSheet, Button, View, Text, TextInput, SafeAreaView } from 'react-native'
 import { Formik } from 'formik'
 import { globalStyles } from '../styles/global'
-
-
+import * as yup from 'yup'
 
 export default function ReviewForm({ addReview }) {
+    const reviewSchema = yup.object(
+        {
+            title: yup.string().required().min(5),
+            body: yup.string().min(5).required(),
+            rating: yup.string().required().test('is num 1-5', 'Rating must be a number btwn 1-5', (val) => {
+                return parseInt(val) < 6 && parseInt(val) > 0
+            })
+        }
+    )
     return (
         <View style={globalStyles.container}>
             <Formik
@@ -21,6 +29,7 @@ export default function ReviewForm({ addReview }) {
                     //Then you call actions with the resetForm function.
                     //actions.resetForm();
                 }}
+                validationSchema={reviewSchema}
             >
                 {(props) => (
                     <View>
