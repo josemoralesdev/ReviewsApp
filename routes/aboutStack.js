@@ -9,9 +9,9 @@ export default function AboutStack() {
             initialRouteName="About"
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: 'dodgerblue',
+                    //backgroundColor: 'dodgerblue',
                 },
-                headerTintColor: '#fff',
+                headerTintColor: '#333',
                 headerTitleStyle: {
                     fontWeight: 'bold'
                 }

@@ -12,9 +12,9 @@ export default function HomeStack() {
             initialRouteName="Home"
             screenOptions={{
                 headerStyle: {
-                    backgroundColor: 'dodgerblue',
+                    //backgroundColor: 'dodgerblue',
                 },
-                headerTintColor: '#fff',
+                headerTintColor: '#333',
                 headerTitleStyle: {
                     fontWeight: 'bold'
                 }
