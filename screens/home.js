@@ -20,12 +20,10 @@ export default function Home({ navigation }) {
     ]);
     const addReview = (review) => {
         review.key = Math.random().toString();
-        review.rating = review.rating.toString()
         setReviews((currentReviews) => {
             return [review, ...currentReviews]
         })
         setModalOpen(!modalOpen);
-        console.log(review)
     }
     return (
         <View style={globalStyles.container}>
