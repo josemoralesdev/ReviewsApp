@@ -38,20 +38,28 @@ export default function ReviewForm({ addReview }) {
                             placeholder="Review Title"
                             onChangeText={props.handleChange('title')}
                             value={props.values.title}
+                            // onBlur gets called when you leave the input, we take advantage of this functionality for displaying the error msg when the user leaves the input & there's an error.
+                            onBlur={props.handleBlur('title')}
                         />
+                        {/* props.touched.title && displays the error message only when you have touched the component & there is an error, instead of just showing the error right away. (Logical AND operator) */}
+                        <Text style={globalStyles.error}>{props.touched.title && props.errors.title}</Text>
                         <TextInput
                             style={globalStyles.input}
                             placeholder="Review Body"
                             onChangeText={props.handleChange('body')}
                             value={props.values.body}
+                            onBlur={props.handleBlur('body')}
                         />
+                        <Text style={globalStyles.error}>{props.touched.body && props.errors.body}</Text>
                         <TextInput
                             style={globalStyles.input}
                             placeholder="Rating 1-5"
                             onChangeText={props.handleChange('rating')}
                             value={props.values.rating}
                             keyboardType="numeric"
+                            onBlur={props.handleBlur('rating')}
                         />
+                        <Text style={globalStyles.error}>{props.touched.rating && props.errors.rating}</Text>
                         <Button title="Submit" onPress={props.handleSubmit} />
                     </View>
                 )}
