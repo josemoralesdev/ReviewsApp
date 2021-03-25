@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
+import Header from '../shared/header'
 import { createStackNavigator } from '@react-navigation/stack'
 import About from '../screens/about'
 const Stack = createStackNavigator();
@@ -20,11 +20,14 @@ export default function AboutStack() {
             <Stack.Screen
                 name="About"
                 component={About}
-                options={{ title: 'About' }}
+                options={({ navigation }) => {
+                    return ({
+                        header: () =>
+                            <Header navigation={navigation} title="About Reviews App" />
+                    })
+                }}
             >
-
             </Stack.Screen>
-
         </Stack.Navigator>
     )
 }
