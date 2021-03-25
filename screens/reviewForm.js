@@ -5,16 +5,22 @@ import { globalStyles } from '../styles/global'
 
 
 
-export default function ReviewForm() {
+export default function ReviewForm({ addReview }) {
     return (
-        <SafeAreaView style={globalStyles.container}>
+        <View style={globalStyles.container}>
             <Formik
                 initialValues={{
                     title: '',
                     body: '',
                     rating: '',
                 }}
-                onSubmit={(values) => { console.log(values) }}
+                // To reset the form you need to pass an argument of actions.
+                // (values, actions)
+                onSubmit={(values) => {
+                    addReview(values)
+                    //Then you call actions with the resetForm function.
+                    //actions.resetForm();
+                }}
             >
                 {(props) => (
                     <View>
@@ -41,7 +47,6 @@ export default function ReviewForm() {
                     </View>
                 )}
             </Formik>
-
-        </SafeAreaView>
+        </View>
     )
 }

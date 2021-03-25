@@ -18,6 +18,15 @@ export default function Home({ navigation }) {
         { title: 'Thor Ragnarok', rating: 4, body: 'lorem ipsum', key: '4' },
         { title: 'The Avenger\'s', rating: 4, body: 'lorem ipsum', key: '5' },
     ]);
+    const addReview = (review) => {
+        review.key = Math.random().toString();
+        review.rating = review.rating.toString()
+        setReviews((currentReviews) => {
+            return [review, ...currentReviews]
+        })
+        setModalOpen(!modalOpen);
+        console.log(review)
+    }
     return (
         <View style={globalStyles.container}>
             <Modal visible={modalOpen} animationType='slide'>
@@ -28,7 +37,7 @@ export default function Home({ navigation }) {
                         style={{ ...styles.modalToggle, ...styles.modalClose }}
                         onPress={() => (setModalOpen(!modalOpen))}
                     />
-                    <ReviewForm />
+                    <ReviewForm addReview={addReview} />
                 </SafeAreaView>
             </Modal>
             <MaterialIcons
