@@ -2,9 +2,11 @@ import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import Card from '../shared/card';
 import { globalStyles, ratingImages } from '../styles/global'
+import FlatButton from '../shared/button'
 
-export default function ReviewDetails({ navigation, route }) {
-    const { title, body, rating } = route.params;
+export default function ReviewDetails({ navigation, route, }) {
+    // console.log(route)
+    const { title, body, rating, key } = route.params;
     return (
         <View style={globalStyles.container}>
             <Card>
@@ -15,6 +17,8 @@ export default function ReviewDetails({ navigation, route }) {
                     <Image source={ratingImages[rating]} />
                 </View>
             </Card>
+            {/* You shouldn't be passing callbacks through navigation, instead, pass objects through navigation & update state accordingly (in case you're not using any state management library) */}
+            <FlatButton text="Delete Review" onPress={() => navigation.navigate('Home', { reviewToDelete: { key, title } })} />
         </View>
     )
 }
