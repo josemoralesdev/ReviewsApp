@@ -1,6 +1,5 @@
-
-import React, { useState } from 'react'
-import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Keyboard } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native'
 import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 import Card from '../shared/card';
 import { globalStyles } from '../styles/global'
@@ -8,9 +7,10 @@ import { MaterialIcons } from '@expo/vector-icons'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ReviewForm from './reviewForm';
 
-export default function Home({ navigation }) {
+export default function Home({ navigation, route }) {
     const ICON_SIZE = 28;
     const [modalOpen, setModalOpen] = useState(false);
+
     const [reviews, setReviews] = useState([
         { title: 'Hulk', rating: 2, body: 'lorem ipsum', key: '1' },
         { title: 'Ant Man', rating: 3, body: 'lorem ipsum', key: '2' },
@@ -18,6 +18,7 @@ export default function Home({ navigation }) {
         { title: 'Thor Ragnarok', rating: 4, body: 'lorem ipsum', key: '4' },
         { title: 'The Avenger\'s', rating: 4, body: 'lorem ipsum', key: '5' },
     ]);
+
     const addReview = (review) => {
         review.key = Math.random().toString();
         setReviews((currentReviews) => {
@@ -25,6 +26,24 @@ export default function Home({ navigation }) {
         })
         setModalOpen(!modalOpen);
     }
+    const deleteReview = (id) => {
+        setReviews(() => {
+            return reviews.filter((item) => item.key !== id);
+        })
+    }
+
+    useEffect(() => {
+        // Checks if route.params? has the parameter of reviewToDelete; if that's true, then proceed to get the title & the key of the review to delete it.
+        if (route.params?.reviewToDelete) {
+            // Get the destructured values from the variables inside reviewToDelete Object.
+            const { key: id, title } = route.params.reviewToDelete;
+            // Invoke deleteReview function & pass the id as an argument.
+            deleteReview(id)
+            Alert.alert('Information', `Review deleted succesfully:\n${title}`, [{ title: 'ok' }])
+        }
+        // Re-runs useEffect if route.params has changed.
+    }, [route.params])
+
     return (
         <View style={globalStyles.container}>
             <Modal visible={modalOpen} animationType='slide'>
